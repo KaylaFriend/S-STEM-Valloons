@@ -1,6 +1,9 @@
+import Phaser.Utils.*;
+
 var Quiz = Quiz || {};
 Quiz.Question = function() {}
 
+var balloonOnScreen;
 var popSound;
 var dingSound;
 var player;
@@ -28,6 +31,7 @@ Quiz.Question.prototype = {
 		startY = -75;
 		yintvl = -100;
 		blnIdx = 0;
+        balloonOnScreen = 0;
 	},
 	preload: function() {
 		// load questions from registry
@@ -203,6 +207,8 @@ Quiz.Question.prototype = {
 		// enable gameObject data
 		container.setData('correct', this.data.questions[this.registry.get('currQIndex')].choices[index].correct);
 
+        balloonOnScreen += 1;                           //WHEN ISTPOP CALLED, SET 0
+
 		// enable gravity on each balloon so it falls
 		this.physics.world.enable(container);
 		container.body.setCollideWorldBounds(true);
@@ -245,6 +251,20 @@ Quiz.Question.prototype = {
 		this.updateScore(currScore);
 		this.checkEnd();
 	},
+    balloonInstantPop: function() {
+		//balloons.remove(balloon, true, true);   //REMOVE ALL INCORRECT BALLOONS 
+        //this.balloons.destroy();                //ON SCREEN 
+    
+        for (int i = 0; i < this.balloonsOnScreen; i++) {
+            if (correct == 1) {
+			    Phaser.utils.RemoveAt(balloons, i);
+		    }    
+        }
+        
+		popSound.play();
+
+		this.checkEnd();
+    },
 	groundHit: function(body, up, down, left, right) {
 		if (down) {
 			// pull the game object out of the body.
