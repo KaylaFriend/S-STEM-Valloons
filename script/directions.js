@@ -9,24 +9,61 @@ Quiz.Directions.prototype = {
 
 		// set directions text group
 		var dirGrp = this.add.group();
-		var next = this.createNextButton();
+		var easy = this.createEasyButton();
+                var normal = this.createNormalButton();
+                var hard = this.createHardButton();
 		var dirs = this.createDirections();
 		dirGrp.add(dirs);
-		dirGrp.add(next);
+		dirGrp.add(easy);
+		dirGrp.add(normal);
+		dirGrp.add(hard);
 	},
-	createNextButton: function() {
+	createEasyButton: function() {
 		var context = { game:this.game };
 		var that = this;
-		var button = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Next')
-			.setOrigin(0.5)
+		var button = this.add.text(this.cameras.main.centerX - 300, this.cameras.main.centerY, 'Easy\n0.75x Points')
+			.setOrigin(0.3, 0.5, -140)
+			.setPadding(10)
+			.setStyle({backgroundColor: '#26eefb', color: '#000', borderRadius: '25px'})
+			.setInteractive({ useHandCursor: true })
+			.on('pointerdown', function() {
+				that.difficulty = 'easy';
+				that.scene.start('intro');
+			})
+			.on('pointerover', () => button.setStyle({ backgroundColor: '#f84bf6', color: '#fff', borderRadius: '25px' }))
+			.on('pointerout', () => button.setStyle({ backgroundColor: '#26eefb', color: '#000', borderRadius: '25px' }));
+		return button;
+	},
+	createNormalButton: function() {
+		var context = { game:this.game };
+		var that = this;
+		var button = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Normal\n1x Points')
+			.setOrigin(0.5, 0.5)
 			.setPadding(10)
 			.setStyle({backgroundColor: '#26ee2b', color: '#000', borderRadius: '25px'})
 			.setInteractive({ useHandCursor: true })
 			.on('pointerdown', function() {
+				that.difficulty = 'normal';
 				that.scene.start('intro');
 			})
 			.on('pointerover', () => button.setStyle({ backgroundColor: '#f84bf6', color: '#fff', borderRadius: '25px' }))
 			.on('pointerout', () => button.setStyle({ backgroundColor: '#26ee2b', color: '#000', borderRadius: '25px' }));
+		return button;
+	},
+	createHardButton: function() {
+		var context = { game:this.game };
+		var that = this;
+		var button = this.add.text(this.cameras.main.centerX + 300, this.cameras.main.centerY, 'Hard\n1.25x Points')
+			.setOrigin(0.7, 0.5, 140)
+			.setPadding(10)
+			.setStyle({backgroundColor: '#442277', color: '#fff', borderRadius: '25px'})
+			.setInteractive({ useHandCursor: true })
+			.on('pointerdown', function() {
+				that.difficulty = 'hard';
+				that.scene.start('intro');
+			})
+			.on('pointerover', () => button.setStyle({ backgroundColor: '#f84bf6', color: '#fff', borderRadius: '25px' }))
+			.on('pointerout', () => button.setStyle({ backgroundColor: '#442277', color: '#fff', borderRadius: '25px' }));
 		return button;
 	},
 	createDirections: function() {

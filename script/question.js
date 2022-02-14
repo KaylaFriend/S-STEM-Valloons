@@ -73,6 +73,9 @@ Quiz.Question.prototype = {
 		// create exit button
 		this.showExitButton();
 
+		// create freeze button
+		this.freezeButton();
+
 		// set dartTimes so you can only fire a dart in intervals.
 		dartTime = this.time.now + 300;
 
@@ -123,6 +126,11 @@ Quiz.Question.prototype = {
 
 		// collide the dart with a balloon
 		this.physics.add.collider(balloons, darts, this.balloonPop, null, this);
+	
+		/*if (freeze button is clicked) {
+		 * 	freezeScreen();
+		 * }
+		 */
 	},
 	// component functions
 	createPlayer: function() {
@@ -235,10 +243,10 @@ Quiz.Question.prototype = {
 		
 		if (correct == 1) {
 			popSound.play();
-			currScore -= 1;
+			currScore -= 1 * this.registry.get('scoreMulti');
 		} else {
 			dingSound.play();
-			currScore += 1;
+			currScore += 1 * this.registry.get('scoreMulti');
 		}
 
 		this.registry.set('score', currScore);
@@ -328,6 +336,22 @@ Quiz.Question.prototype = {
 			this.scene.start('end');
 		else
 			this.scene.start('question');
+	},
+	freezeButton: function() {
+		var context = { game:this.game };
+		var freeze = this.add.text(this.cameras.main.width / 2, this.cameras.main.height - 20, 'Freeze')
+			.setOrigin(0.5)
+			.setPadding(10)
+			.setStyle({backgroundColor: '#f84bf6', color: '#fff', borderRadius: '25px'})
+			.setInteractive({ useHandCursor: true })
+			.on('pointerdown', function() {
+				//pause balloon movement for 5 seconds
+				
+				//resume movement after time elapses
+				
+			})
+			.on('pointerover', () => button.setStyle({ backgroundColor: '#26ee2b', color: '#000', borderRadius: '25px' }))
+			.on('pointerout', () => button.setStyle({ backgroundColor: '#f84bf6', color: '#fff', borderRadius: '25px' }));
 	}
 }
 

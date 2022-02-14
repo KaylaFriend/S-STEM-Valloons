@@ -20,7 +20,10 @@ Quiz.Intro.prototype = {
 	createStartButton: function() {
 		var context = { game:this.game };
 		var that = this;
-		var button = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Start Game')
+
+		//CREATE POWERUP SELECTION BUTTONS
+
+		var button = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY + 200, 'Start Game')
 			.setOrigin(0.5)
 			.setPadding(10)
 			.setStyle({backgroundColor: '#26ee2b', color: '#000', borderRadius: '25px'})
