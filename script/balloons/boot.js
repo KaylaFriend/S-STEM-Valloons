@@ -1,22 +1,31 @@
 var Quiz = Quiz || {};
 Quiz.Boot = function() {};
 
+const dir = 'media/balloons/';
+var load = function(game, type, name, uri) {
+	game.load[type](name, dir + uri);
+}
+
+// Quicker to type loading methods
+var loadImage;
+var loadAudio;
+
 Quiz.Boot.prototype = {
 	init: function() {
 		this.currQIndex = 0;
 		this.score = 0;
 	},
 	preload: function() {
-		// load all images from media folder needed for game
-		this.load.image('logo', 'media/logo.png');
-		this.load.image('bg', 'media/ValloonsBG.jpg');
-		this.load.image('red', 'media/RedBalloon.png');
-		this.load.image('blue', 'media/BlueBalloon.png');
-		this.load.image('green', 'media/GreenBalloon.png');
-		this.load.image('pink', 'media/PinkBalloon.png');
-		this.load.image('dart', 'media/CartoonDart.png');
-		this.load.audio('pop', ['media/balloonPop.wav']);
-		this.load.audio('ding', ['media/ding.wav']);
+		// load all images from  folder needed for game
+		load(this, 'image', 'logo', 'logo.png');
+		load(this, 'image', 'bg', 'ValloonsBG.jpg');
+		load(this, 'image', 'red', 'RedBalloon.png');
+		load(this, 'image', 'blue', 'BlueBalloon.png');
+		load(this, 'image', 'green', 'GreenBalloon.png');
+		load(this, 'image', 'pink', 'PinkBalloon.png');
+		load(this, 'image', 'dart', 'CartoonDart.png');
+		load(this, 'audio', 'pop', 'balloonPop.wav');
+		load(this, 'audio', 'ding', 'ding.wav');
 		
 		this.balloons = ['red', 'blue', 'green', 'pink'];
 		this.num_balloons = 4;
@@ -60,3 +69,4 @@ Quiz.Boot.prototype = {
 		this.scene.start('directions');
 	}
 }
+

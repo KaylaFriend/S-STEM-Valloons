@@ -43,11 +43,11 @@ if (!empty($_POST['play-game']) && isset($_POST['play-game'])) {
 <!--	<script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser-arcade-physics.min.js"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
 
-	<script src="script/boot.js"></script>
-	<script src="script/directions.js"></script>
-	<script src="script/intro.js"></script>
-	<script src="script/question.js"></script>
-	<script src="script/end.js"></script>
+	<script src="script/balloons/boot.js"></script>
+	<script src="script/balloons/directions.js"></script>
+	<script src="script/balloons/intro.js"></script>
+	<script src="script/balloons/question.js"></script>
+	<script src="script/balloons/end.js"></script>
 </head>
 <body>
 <?php
@@ -56,7 +56,7 @@ if (!empty($_POST['play-game']) && isset($_POST['play-game'])) {
 	<main class="container ex-space">
 		<div class="d-none" id="gameid"><?php echo $gameID; ?></div>
 		<h2 class="center-align"><?php echo $gameName; ?></h2>
-		<script src="script/game.js"></script>
+		<script src="script/balloons/game.js"></script>
 	</main>
 </body>
 </html>
